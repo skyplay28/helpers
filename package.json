@@ -1,0 +1,32 @@
+{
+  "name": "@skyplay19/helpers",
+  "version": "1.0.27",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test:types": "ts-node-dev --respawn test/types.ts",
+    "test:bind": "ts-node-dev --respawn test/bind.ts",
+    "test:hidden": "ts-node-dev --respawn test/hidden.ts",
+    "test:propertyDecorator": "ts-node-dev --respawn test/propertyDecorator.ts",
+    "test:sleep": "ts-node-dev --respawn test/sleep.ts",
+    "build": "tsc"
+  },
+  "author": {
+    "name": "Anya Simba",
+    "email": "anyasimba@yandex.ru",
+    "url": "https://career.habr.com/anyasimba"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skyplay19/helpers"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.3"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
