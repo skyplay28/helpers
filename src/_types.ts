@@ -12,7 +12,10 @@ export function optional<T>(value?: T): typeof value {
     return value
 }
 
-export type Class<T extends { new (...args: any[]): any } = any> = {
-    new (...args: ConstructorParameters<T>): T
-    prototype: T
+export type Class<
+    T extends { new (...args: any[]): InstanceType<T> } = {
+        new (...args: any[]): any
+    }
+> = {
+    new (...args: ConstructorParameters<T>): InstanceType<T>
 }

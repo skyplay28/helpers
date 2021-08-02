@@ -1,19 +1,23 @@
 export type propertyDecorator = typeof propertyDecorator
-export function propertyDecorator(getDescriptor: (accessors: {get: () => any, set: (value: any) => void}) => PropertyDescriptor, prototype?: any) {
-    return function(target: any, propertyKey: string | symbol) {
-        if (!target.hasOwnProperty('___propKeys')) {
+export function propertyDecorator(
+    getDescriptor: (accessors: { get: () => any; set: (value: any) => void }) => PropertyDescriptor,
+    prototype?: any
+) {
+    return function (target: any, propertyKey: string | symbol) {
+        if (!Object.hasOwnProperty.call(target, '___propKeys')) {
             Object.defineProperty(target, '___propKeys', {
                 configurable: false,
                 enumerable: false,
                 writable: false,
-                value: {}
+                value: {},
             })
         }
         const $$key = target.___propKeys[propertyKey]
             ? target.___propKeys[propertyKey]
-            : target.___propKeys[propertyKey] = typeof propertyKey === 'symbol'
-                ? Symbol(propertyKey.toString())
-                : Symbol(propertyKey)
+            : (target.___propKeys[propertyKey] =
+                  typeof propertyKey === 'symbol'
+                      ? Symbol(propertyKey.toString())
+                      : Symbol(propertyKey))
 
         Object.defineProperty(target, $$key, {
             configurable: true,
@@ -24,7 +28,10 @@ export function propertyDecorator(getDescriptor: (accessors: {get: () => any, se
         const currentDescriptor = Object.getOwnPropertyDescriptor(prototype || target, propertyKey)
 
         let get: () => any, set: (value: any) => void
-        if (currentDescriptor == null || (currentDescriptor.get == null && currentDescriptor.set == null)) {
+        if (
+            currentDescriptor == null ||
+            (currentDescriptor.get == null && currentDescriptor.set == null)
+        ) {
             if (currentDescriptor && currentDescriptor.value) {
                 const value = currentDescriptor.value
                 get = function (this: any) {
@@ -60,7 +67,7 @@ export function propertyDecorator(getDescriptor: (accessors: {get: () => any, se
             }
         }
 
-        const resultDescriptor = {...getDescriptor({get, set})}
+        const resultDescriptor = { ...getDescriptor({ get, set }) }
 
         if (currentDescriptor == null) {
             Object.defineProperty(target, propertyKey, resultDescriptor)
@@ -96,7 +103,11 @@ export function propertyDecorator(getDescriptor: (accessors: {get: () => any, se
             if (currentDescriptor.get && currentDescriptor.set == null) {
                 delete resultDescriptor.writable
             }
-            if (currentDescriptor.get == null && currentDescriptor.set == null && !currentDescriptor.writable) {
+            if (
+                currentDescriptor.get == null &&
+                currentDescriptor.set == null &&
+                !currentDescriptor.writable
+            ) {
                 delete resultDescriptor.writable
             }
             Object.defineProperty(target, propertyKey, resultDescriptor)

@@ -7,7 +7,11 @@ declare global {
     const optional: typeof _.optional
     type nullable<T> = _.nullable<T>
     const nullable: typeof _.nullable
-    type Class<T extends new (...args: any[]) => any = any> = _.Class<T>
+    type Class<
+        T extends { new (...args: any[]): InstanceType<T> } = {
+            new (...args: any[]): any
+        }
+    > = _.Class<T>
 
     type bind = _.bind
     function bind<T extends Function>(

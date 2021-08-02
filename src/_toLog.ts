@@ -3,7 +3,7 @@ export const toLogFilters: ((arg: any) => any)[] = []
 export type toLog = typeof toLog
 export function toLog<T extends any[]>(...args: T): T {
     if (args.length === 0) {
-        return [] as any as T
+        return ([] as any) as T
     }
     ++stack
     const result = args.map(arg => {
