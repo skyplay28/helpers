@@ -2,7 +2,7 @@ import { propertyDecorator } from '../src/_propertyDecorator'
 import { hidden } from '../src/_hidden'
 import { toLog } from '../src/_toLog'
 
-const test = propertyDecorator(({get, set}) => ({
+const test = propertyDecorator(({ get, set }) => ({
     configurable: true,
     enumerable: true,
     get() {
@@ -15,7 +15,7 @@ const test = propertyDecorator(({get, set}) => ({
 
 class Foo {
     @hidden x: number = 19
-    @test y?: number = 42*2
+    @test y?: number = 42 * 2
 }
 
 const foo = new Foo()

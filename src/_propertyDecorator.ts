@@ -9,7 +9,7 @@ export function propertyDecorator(
                 configurable: false,
                 enumerable: false,
                 writable: false,
-                value: {},
+                value: Object.create(target.___propKeys || {}),
             })
         }
         const $$key = target.___propKeys[propertyKey]
@@ -25,7 +25,7 @@ export function propertyDecorator(
             writable: true,
         })
 
-        const currentDescriptor = Object.getOwnPropertyDescriptor(prototype || target, propertyKey)
+        const currentDescriptor = Object.getOwnPropertyDescriptor(prototype ?? target, propertyKey)
 
         let get: () => any, set: (value: any) => void
         if (
@@ -83,13 +83,6 @@ export function propertyDecorator(
 
         if (resultDescriptor.get || resultDescriptor.set) {
             if (currentDescriptor.get || currentDescriptor.set) {
-                if (resultDescriptor.get && currentDescriptor.get == null) {
-                    delete resultDescriptor.get
-                }
-                if (resultDescriptor.set && currentDescriptor.set == null) {
-                    delete resultDescriptor.set
-                }
-
                 Object.defineProperty(target, propertyKey, resultDescriptor)
                 return
             }

@@ -1,6 +1,7 @@
 export { bind } from './_bind'
+export { enumerable } from './_enumerable'
 export { hidden } from './_hidden'
+export { plain, plains, toPlainFilters } from './_plain'
 export { propertyDecorator } from './_propertyDecorator'
 export { sleep } from './_sleep'
-export { toLog } from './_toLog'
 export * from './_types'
