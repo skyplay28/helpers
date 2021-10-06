@@ -9,21 +9,24 @@ export function plain<T>(arg: T): T {
     }
 
     if (typeof arg !== 'object') {
+        --stack
         return applyFilters(arg)
     }
 
     if (already.has(arg)) {
+        --stack
         return already.get(arg)
     }
 
     let result: any
-    already.set(arg, result)
     arg = applyFilters(arg)
 
     if (Array.isArray(arg)) {
         result = arg.map(arg => plain(arg))
+        already.set(arg, result)
     } else {
         result = {}
+        already.set(arg, result)
         get(result, arg, arg)
     }
 

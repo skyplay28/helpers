@@ -10,6 +10,9 @@ declare global {
         descriptor: TypedPropertyDescriptor<T>
     ): TypedPropertyDescriptor<T> | void
 
+    type compose = _.compose
+    const compose: typeof _.compose
+
     type enumerable = _.enumerable
     const enumerable: typeof _.enumerable
 
@@ -31,11 +34,17 @@ declare global {
 
     type optional<T> = _.optional<T>
     const optional: typeof _.optional
+
     type nullable<T> = _.nullable<T>
     const nullable: typeof _.nullable
+
     type Class<
         T extends { new (...args: any[]): InstanceType<T> } = {
             new (...args: any[]): any
         }
     > = _.Class<T>
+
+    type Mutable<T> = _.Mutable<T>
+    type mutable = _.mutable
+    const mutable: typeof _.mutable
 }

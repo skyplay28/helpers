@@ -19,3 +19,11 @@ export type Class<
 > = {
     new (...args: ConstructorParameters<T>): InstanceType<T>
 }
+
+export type Mutable<T> = {
+    -readonly [P in keyof T]: T[P]
+}
+export type mutable = typeof mutable
+export function mutable<T>(obj: T): Mutable<T> {
+    return obj
+}

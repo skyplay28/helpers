@@ -1,4 +1,5 @@
 export { bind } from './_bind'
+export { compose } from './_compose'
 export { enumerable } from './_enumerable'
 export { hidden } from './_hidden'
 export { plain, plains, toPlainFilters } from './_plain'
